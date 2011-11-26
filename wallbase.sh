@@ -1,3 +1,13 @@
+#!/bin/bash
+#
+# wallbase - wallbase.net batch downloader modified 25-Nov-2011 by Ron Record
+#      (ronaldrecord@gmail.com) to download my favorites
+#
+# Usage: wb [name of favorite set]
+#
+# Enter your username, password, and location of your Wallbase directory below
+#
+# Based on WallBase 2.2 from http://4geeksfromnet.com:
 #
 # This script gets the beautiful wallpapers from http://wallbase.cc
 # This script is brought to you by 7sins@4geeksfromnet.com
@@ -215,7 +225,7 @@ PASS=yourpassword
 ###############################
 
 # Define the maximum number of wallpapers that you would like to download MAX_RANGE=26460
-MAX_RANGE=240
+MAX_RANGE=2048
 # For accepted values of resolution see Section 1
 RESOLUTION=0
 # For accepted values of aspect ratio see Section 2
@@ -228,24 +238,124 @@ TOPIC=123
 SIZE=gteq
 # For accepted Thumbnails per page see Section 6
 THPP=60
-# For download location see Section 7
-LOCATION=/location/to_your/wallpapers_folder
 # Best of : see Section 8
 TIME=0
 # For Types see Section 9
-TYPE=1
+TYPE=5
 # For order Options see Section 10
 ORDER=relevance
 # See Section 11
 ORDER_TYPE=desc
 # See Section 12
 QUERY="$1"
-# See Section 13
-COLLECTION=-1
+
+# Location prefix
+PREFIX=/home/Username/Pictures/Wallbase
+
+# For download location see Section 7
+LOCATION=$PREFIX/Space
+
+# For collection setting See Section 13
+COLLECTION=10842
 
 ###############################
 ## End Configuration Options ##
 ###############################
+
+case $QUERY in
+Breasts|breasts)
+    LOCATION=$PREFIX/Breasts
+    COLLECTION=12337
+    ;;
+Nudes_4|nudes_4)
+    LOCATION=$PREFIX/Nudes_4
+    COLLECTION=19445
+    ;;
+Anime_3|anime_3)
+    LOCATION=$PREFIX/Anime_3
+    COLLECTION=25437
+    ;;
+Pussy|pussy)
+    LOCATION=$PREFIX/Pussy
+    COLLECTION=12382
+    ;;
+Derriere|derriere|butt|Butt|Ass|ass)
+    LOCATION=$PREFIX/Derriere
+    COLLECTION=12475
+    ;;
+Wet|wet)
+    LOCATION=$PREFIX/Wet
+    COLLECTION=3452
+    ;;
+Asian|asian)
+    LOCATION=$PREFIX/Asian
+    COLLECTION=10841
+    ;;
+Evgenia|evgenia)
+    LOCATION=$PREFIX/Evgenia
+    COLLECTION=10873
+    ;;
+Corinna|corinna|Corrina|corrina)
+    LOCATION=$PREFIX/Corinna
+    COLLECTION=10874
+    ;;
+Monica|monica)
+    LOCATION=$PREFIX/Monica
+    COLLECTION=10916
+    ;;
+Klaudia|klaudia|Claudia|claudia)
+    LOCATION=$PREFIX/Klaudia
+    COLLECTION=11368
+    ;;
+Panties|panties)
+    LOCATION=$PREFIX/Panties
+    COLLECTION=19116
+    ;;
+Celeb|celeb)
+    LOCATION=$PREFIX/Celeb
+    COLLECTION=3160
+    ;;
+Anime|anime)
+    LOCATION=$PREFIX/Anime
+    COLLECTION=3159
+    ;;
+Anime_2|anime_2)
+    LOCATION=$PREFIX/Anime_2
+    COLLECTION=14951
+    ;;
+Art|art)
+    LOCATION=$PREFIX/Art
+    COLLECTION=12821
+    ;;
+Nudes|nudes)
+    LOCATION=$PREFIX/Nudes
+    COLLECTION=2150
+    ;;
+Nudes_2|nudes_2)
+    LOCATION=$PREFIX/Nudes_2
+    COLLECTION=11397
+    ;;
+Nudes_3|nudes_3)
+    LOCATION=$PREFIX/Nudes_3
+    COLLECTION=13164
+    ;;
+Dragonflies|dragonflies)
+    LOCATION=$PREFIX/Dragonflies
+    COLLECTION=3234
+    ;;
+Fractals|fractals)
+    LOCATION=$PREFIX/Fractals
+    COLLECTION=10843
+    ;;
+Space|space)
+    LOCATION=$PREFIX/Space
+    COLLECTION=10842
+    ;;
+Waterfalls|waterfalls)
+    LOCATION=$PREFIX/Waterfalls
+    COLLECTION=3233
+    ;;
+esac
 
 mkdir -p $LOCATION
 cd "$LOCATION"
@@ -260,7 +370,7 @@ if [ $CATEGORY == 001 ] || [ $CATEGORY == 011 ] || [ $CATEGORY == 111 ] || [$TYP
         read
         exit
     fi
-    echo "username=$USER&pass=$PASS&nopass_email=Type+in+your+e-mail+and+press+enter&nopass=0&1=1" > login
+    echo "username=$USER&usrname=$USER&pass=$PASS&nopass_email=wallbase@ronrecord.com&nopass=0&1=1" > login
     wget --keep-session-cookies --save-cookies=cookies.txt --referer=http://wallbase.cc/start/ --post-file=login http://wallbase.cc/user/login
     wget --keep-session-cookies --load-cookies=cookies.txt --save-cookies=cookies.txt --referer=wallbase.cc http://wallbase.cc/user/adult_confirm/1
     rm index.html
